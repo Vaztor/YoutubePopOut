@@ -1,0 +1,35 @@
+// ==UserScript==
+// @name       Youtube Video Pop-Out
+// @namespace  http:/www.vaztor.com
+// @version    0.1
+// @description  Appends the Youtube Video ID to the pop out video script. Reinstates a pop out video button
+// @match      http://www.youtube.com/*
+// @match      https://www.youtube.com/*
+// @copyright  2012+, You
+// @require http://code.jquery.com/jquery-latest.js
+// ==/UserScript==
+//URL is http://www.youtube.com/watch_popup?v=
+
+$('body').append('<input type="button" value="Pop Out" id="CP">')
+$("#CP").css("position", "fixed").css("top", 0).css("left", 0);
+
+var currentURL = window.location.href;
+var popOutURL = "http://www.youtube.com/watch_popup?v="
+
+console.log(popOutURL);
+console.log(currentURL);
+
+var n = currentURL.indexOf("v=");
+n = n+2;
+
+
+for(var i =0; i<11; i++)
+{
+    popOutURL += currentURL[n+i];
+    console.log(currentURL[n+i])
+    console.log(popOutURL);
+}
+                     
+$('#CP').click(function(){ 
+      window.open(popOutURL, '_blank');
+});
